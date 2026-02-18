@@ -3,7 +3,7 @@
   become: yes
   tasks: 
   - name: enabling nodejs 20 version
-    ansible.builtin.command: dnf enable module nodejs:20 -y 
+    ansible.builtin.command: dnf module enable nodejs:20 -y 
 
   - name: installing nodejs
     ansible.builtin.dnf:
