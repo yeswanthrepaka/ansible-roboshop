@@ -38,7 +38,7 @@
       value: "{{ item.instances[0].private_ip_address }}"
     loop: "{{ ec2_output.results }}"
 
-  - name: create route 53 records
+  - name: create route 53 records for frontend
     amazon.aws.route53:
       state: present
       zone: "{{ domain_name }}"
