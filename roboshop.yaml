@@ -1,5 +1,5 @@
 - name: EC2 instance CLI
-  hosts: local
+  hosts: all
   connection: local
   vars:
     instances:
