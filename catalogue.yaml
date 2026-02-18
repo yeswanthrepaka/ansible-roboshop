@@ -5,13 +5,10 @@
   - name: enable nodejs version 20
     ansible.builtin.command: dnf module enable nodejs:20 -y
 
-  - name: install nodejs and mongodb
+  - name: install nodejs
     ansible.builtin.dnf:
-      name: "{{ item }}"
+      name: nodejs
       state: present
-    loop: 
-    - nodejs
-    - mongodb-mongosh
 
   - name: adding roboshop user
     ansible.builtin.user:
@@ -60,6 +57,11 @@
     ansible.builtin.copy:
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
+
+  - name: installing mongodb client
+    ansible.builtin.dnf:
+      name: mongodb-mongosh
+      state: present
 
   - name: check products loaded
     ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
