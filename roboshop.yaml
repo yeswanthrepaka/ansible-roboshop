@@ -1,0 +1,38 @@
+- name: EC2 instance CLI
+  hosts: all
+  connection: local
+  vars:
+    instances:
+    - mongodb
+    - catalogue
+    sg_id: sg-05997a7119396a217
+    ami_id: ami-0220d79f3f480ecf5
+    domain_name: "repaka.online"
+    env: "dev"
+  tags:
+  - name: create ec2 instance
+    amazon.aws.ec2_instance:
+      name: "{{ item }}-{{ env }}"
+      instance_type: t3.micro
+      security_group: "{{ sg_id }}"
+      image_id: "{{ ami_id }}"
+      tags:
+        project: "Roboshop"
+        component: "{{ item }}"
+        environment: "{{ env }}"
+      loop: "{{ instances }}"
+      register: ec2-output
+
+  - name: Print the output
+    ansible.builtin.debug:
+     msg: "{{ ec2-output }}"
+
+  # - name: create route 53 records
+  #   amazon.aws.route53:
+  #     state: present
+  #     zone: repaka.online
+  #     record: "{{ instance }}-dev-{{ zone }}
+  #     type: A
+  #     ttl: 1
+  #     value: 1.1.1.1,2.2.2.2,3.3.3.3
+  #     wait: true
