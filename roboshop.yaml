@@ -1,6 +1,6 @@
 - name: EC2 instance CLI
-  hosts: localhost
-  connection: localhost
+  hosts: local
+  connection: local
   vars:
     instances:
     - mongodb
