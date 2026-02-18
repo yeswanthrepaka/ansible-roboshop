@@ -21,11 +21,11 @@
         component: "{{ item }}"
         environment: "{{ env }}"
     loop: "{{ instances }}"
-    register: ec2-output
+    register: ec2_output
 
   - name: Print the output
     ansible.builtin.debug:
-     msg: "{{ ec2-output }}"
+     msg: "{{ ec2_output }}"
 
   # - name: create route 53 records
   #   amazon.aws.route53:
