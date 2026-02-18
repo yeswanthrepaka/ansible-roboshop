@@ -37,6 +37,7 @@
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
     loop: "{{ ec2_output.results }}"
+    when: item.item != "frontend"
 
   - name: create route 53 records
     amazon.aws.route53:
