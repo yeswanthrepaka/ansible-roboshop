@@ -5,6 +5,7 @@
     instances:
     - mongodb
     - catalogue
+    - frontend
     sg_id: sg-05997a7119396a217
     ami_id: ami-0220d79f3f480ecf5
     domain_name: "repaka.online"
@@ -36,3 +37,16 @@
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
     loop: "{{ ec2_output.results }}"
+
+  - name: create route 53 records
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "roboshop-{{ env }}.{{ domain_name }}" # roboshop-dev.repaka.online
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}"
+      wait: false
+      overwrite: true
+    loop: "{{ ec2_output.results }}"
+    when: item.item == "frontend"
