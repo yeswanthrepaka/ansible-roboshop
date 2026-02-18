@@ -20,8 +20,8 @@
         project: "Roboshop"
         component: "{{ item }}"
         environment: "{{ env }}"
-      loop: "{{ instances }}"
-      register: ec2-output
+    loop: "{{ instances }}"
+    register: ec2-output
 
   - name: Print the output
     ansible.builtin.debug:
