@@ -40,8 +40,8 @@
 
   - name: unzipping code
     ansible.builtin.unarchive:
-      src: /app
-      dest: /tmp/user.zip
+      src: /tmp/user.zip
+      dest: /app
       remote_src: yes
  
   - name: install dependencies
