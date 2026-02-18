@@ -9,7 +9,7 @@
     ami_id: ami-0220d79f3f480ecf5
     domain_name: "repaka.online"
     env: "dev"
-  tags:
+  tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
       name: "{{ item }}-{{ env }}"
