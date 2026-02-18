@@ -27,12 +27,14 @@
     ansible.builtin.debug:
      msg: "{{ ec2_output }}"
 
-  # - name: create route 53 records
-  #   amazon.aws.route53:
-  #     state: present
-  #     zone: repaka.online
-  #     record: "{{ instance }}-dev-{{ zone }}
-  #     type: A
-  #     ttl: 1
-  #     value: 1.1.1.1,2.2.2.2,3.3.3.3
-  #     wait: true
+  - name: create route 53 records
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "{{ item }}-{{ env }}-{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_address }}"
+      wait: "false"
+      overwrite: "true"
+    loop: "{{ ec2_output.results }}"
