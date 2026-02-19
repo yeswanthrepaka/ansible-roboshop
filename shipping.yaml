@@ -15,7 +15,7 @@
       name: roboshop
       home: /app
       shell: /sbin/nologin
-      systen: true
+      system: true
       comment: "Roboshop user"
 
   - name: removing app directory
