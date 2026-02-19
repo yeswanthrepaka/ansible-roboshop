@@ -19,12 +19,12 @@
       comment: "Roboshop user"
 
   - name: removing app directory
-    ansible.builtin.file
+    ansible.builtin.file:
       path: /app
       state: absent
 
   - name: creating app directory
-    ansible.builtin.file
+    ansible.builtin.file:
       path: /app
       state: directory
 
