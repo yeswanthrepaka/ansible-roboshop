@@ -9,7 +9,7 @@
     loop:
     - python3
     - gcc
-    - python3-devil
+    - python3-devel
 
   - name: adding roboshop user
     ansible.builtin.user:
